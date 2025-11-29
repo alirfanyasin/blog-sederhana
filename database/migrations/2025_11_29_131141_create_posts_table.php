@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title'); // 255 characters by default
             $table->text('content');
-            $table->string('author');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps(); // created_at and updated_at
         });
     }

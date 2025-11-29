@@ -10,7 +10,7 @@
         </a>
       </h2>
       <p class="meta">
-        Oleh {{ $post['author'] }} | {{ $post['created_at'] }}
+        Oleh {{ $post->user->name }} | {{ $post['created_at'] }}
       </p>
       <p>{{ Str::limit($post['content'], 150) }}</p>
     </article>

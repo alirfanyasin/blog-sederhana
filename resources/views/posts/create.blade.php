@@ -13,7 +13,12 @@
     </div>
     <div class="form-group">
       <label for="author">Penulis</label>
-      <input type="text" name="author" id="author" value="{{ old('author') }}" required>
+      {{-- <input type="text" name="author" id="author" value="{{ old('author') }}" required> --}}
+      <select name="user_id" id="">
+        @foreach ($users as $user)
+          <option value="{{ $user->id }}">{{ $user->name }}</option>
+        @endforeach
+      </select>
       @error('author')
         <span class="error">{{ $message }}</span>
       @enderror
