@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -55,5 +56,56 @@ class PostController extends Controller
         $posts = $this->getPosts();
         $post = collect($posts)->firstWhere('id', $id);
         return view('posts.show', compact('post'));
+    }
+
+
+
+
+
+
+
+
+    // Create atau Tambah Data
+    public function tambahData()
+    {
+
+        $data = [
+            'title' => 'Judul ketiga',
+            'content' => 'Isi konten ketiga',
+            'author' => 'Penulis ketiga'
+        ];
+
+        Post::create($data);
+        return redirect()->to('/');
+    }
+
+    public function edit($id)
+    {
+        $post = Post::find($id);
+        $post->update([
+            'title' => 'Judul Telah Diubah',
+            'content' => 'Isi konten telah diubah'
+        ]);
+        return redirect()->to('/');
+    }
+
+    public function hapus($id)
+    {
+        // $post = Post::find($id);
+        // $post->delete();
+        // return redirect()->to('/');
+
+        Post::destroy($id);
+        return redirect()->to('/');
+    }
+
+    public function bacaData()
+    {
+        $posts = Post::all();
+        foreach ($posts as $post) {
+            echo "Judul: " . $post->title . "<br>";
+            echo "Isi: " . $post->content . "<br>";
+            echo "Penulis: " . $post->author . "<br><hr>";
+        }
     }
 }
